@@ -1,7 +1,5 @@
 # ansible-redis
 
-[![Build Status](https://travis-ci.org/DavidWittman/ansible-redis.svg?branch=master)](https://travis-ci.org/DavidWittman/ansible-redis)
-
  - Requires Ansible 1.6.3+
  - Compatible with most versions of Ubuntu/Debian and RHEL/CentOS 6.x
 
@@ -145,7 +143,7 @@ Along with the variables listed above, Sentinel has a number of its own configur
 
 ## Installing redis from a source file in the ansible role
 
-If the environment your server resides in does not allow downloads (i.e. if the machine is sitting in a dmz) set the variable `redis_tarball` to the path of a locally downloaded tar.gz file to prevent a http download from redis.io.  
+If the environment your server resides in does not allow downloads (i.e. if the machine is sitting in a dmz) set the variable `redis_tarball` to the path of a locally downloaded tar.gz file to prevent a http download from redis.io.
 Do not forget to set the version variable to the same version of the tar.gz. to avoid confusion !
 
 For example (file was stored in same folder as the playbook that included the redis role):
@@ -202,15 +200,15 @@ redis_slave_priority: 100
 redis_repl_backlog_size: false
 
 ## Logging
-redis_logfile: '""'                                                             
-# Enable syslog. "yes" or "no"                                                  
-redis_syslog_enabled: "yes"                                                     
-redis_syslog_ident: redis_{{ redis_port }}                                      
-# Syslog facility. Must be USER or LOCAL0-LOCAL7                                
-redis_syslog_facility: USER   
+redis_logfile: '""'
+# Enable syslog. "yes" or "no"
+redis_syslog_enabled: "yes"
+redis_syslog_ident: redis_{{ redis_port }}
+# Syslog facility. Must be USER or LOCAL0-LOCAL7
+redis_syslog_facility: USER
 
 ## General configuration
-redis_daemonize: "yes"                                                          
+redis_daemonize: "yes"
 redis_pidfile: /var/run/redis/{{ redis_port }}.pid
 # Number of databases to allow
 redis_databases: 16
@@ -237,7 +235,7 @@ redis_sentinel_dir: /var/lib/redis/sentinel_{{ redis_sentinel_port }}
 redis_sentinel_bind: 0.0.0.0
 redis_sentinel_port: 26379
 redis_sentinel_pidfile: /var/run/redis/sentinel_{{ redis_sentinel_port }}.pid
-redis_sentinel_logfile: '""'                                                    
+redis_sentinel_logfile: '""'
 redis_sentinel_syslog_ident: sentinel_{{ redis_sentinel_port }}
 redis_sentinel_monitors:
   - name: master01
