@@ -1,7 +1,8 @@
+
 ---
 ## Installation options
 redis_version: 2.8.9
-redis_install_dir: /opt/redis
+redis_install_dir: /usr/bin
 redis_user: redis
 redis_dir: /var/lib/redis/{{ redis_port }}
 redis_tarball: false
@@ -35,15 +36,15 @@ redis_slave_priority: 100
 redis_repl_backlog_size: false
 
 ## Logging
-redis_logfile: '""'                                                             
-# Enable syslog. "yes" or "no"                                                  
-redis_syslog_enabled: "yes"                                                     
-redis_syslog_ident: redis_{{ redis_port }}                                      
-# Syslog facility. Must be USER or LOCAL0-LOCAL7                                
-redis_syslog_facility: USER   
+redis_logfile: '""'
+# Enable syslog. "yes" or "no"
+redis_syslog_enabled: "yes"
+redis_syslog_ident: redis_{{ redis_port }}
+# Syslog facility. Must be USER or LOCAL0-LOCAL7
+redis_syslog_facility: USER
 
 ## General configuration
-redis_daemonize: "yes"                                                          
+redis_daemonize: "yes"
 redis_pidfile: /var/run/redis/{{ redis_port }}.pid
 # Number of databases to allow
 redis_databases: 16
@@ -78,12 +79,14 @@ redis_sentinel_port: 26379
 redis_sentinel_pidfile: /var/run/redis/sentinel_{{ redis_sentinel_port }}.pid
 redis_sentinel_logfile: '""'
 redis_sentinel_syslog_ident: sentinel_{{ redis_sentinel_port }}
+
+redis_master_host: localhost
+redis_master_port: "{{redis_port}}"
 redis_sentinel_monitors:
-  - name: master01
-    host: localhost
-    port: 6379
+  - name: "{{redis_master}}"
+    host: "{{redis_master_host}}"
+    port: "{{redis_master_port}}"
     quorum: 2
-    auth_pass: ant1r3z
     down_after_milliseconds: 30000
     parallel_syncs: 1
     failover_timeout: 180000

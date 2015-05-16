@@ -17,5 +17,18 @@ galaxy_info:
     - database
     - database:nosql
 
-dependencies: []
+dependencies:
+  - role: apt
+    apt:
+      packages:
+        - redis-server
+  - role: ferm-firewall
+    ferm_rules:
+      redis:
+        - chain: INPUT
+          domains: [ip, ip6]
+          rules:
+            - {rule: "proto tcp dport {{redis_port}} ACCEPT;", comment: "Redis server"}
+            - {rule: "proto tcp dport {{redis_sentinel_port}} ACCEPT;", comment: "Redis Sentinel"}
+
 version: 1.0.3

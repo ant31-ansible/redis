@@ -1,11 +1,14 @@
 ---
-- include: install.yml
+- name: Stop default redis-server
+  service: name=redis-server state=stopped
+  tags:
+    - redis
+
+- name: Stop default sentinel
+  service: name=redis-sentinel state=stopped
+  tags:
+    - redis
+
 - include: server.yml
-  when: not redis_sentinel
-  tags:
-    - config
 - include: sentinel.yml
-  when: redis_sentinel
-  tags:
-    - config
 - include: local_facts.yml
